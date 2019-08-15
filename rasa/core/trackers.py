@@ -134,7 +134,7 @@ class DialogueStateTracker(object):
         self.latest_message = None  # 上一条用户说的话
         self.latest_bot_utterance = None  # 上一条机器人说的话
         self._reset()  # 初始化
-        self.active_form = {}  # 这一句其实可以删掉，因为self._reset()就已经把active_form设成空字典了
+        self.active_form = {}  # 当前操作的表单，这一句其实可以删掉，因为self._reset()就已经把active_form设成空字典了
 
     ###
     # Public tracker interface
@@ -179,6 +179,7 @@ class DialogueStateTracker(object):
     def change_form_to(self, form_name: Text) -> None:
         """Activate or deactivate a form"""
         if form_name is not None:
+            # 更改当前操作的表单
             self.active_form = {
                 "name": form_name,
                 "validate": True,
@@ -190,11 +191,13 @@ class DialogueStateTracker(object):
 
     def set_form_validation(self, validate: bool) -> None:
         """Toggle form validation"""
+        # 更改当前操作表单的有效性
         self.active_form["validate"] = validate
 
     def reject_action(self, action_name: Text) -> None:
         """Notify active form that it was rejected"""
         if action_name == self.active_form.get("name"):
+            # TODO：待理解
             self.active_form["rejected"] = True
 
     def set_latest_action_name(self, action_name: Text) -> None:
@@ -202,7 +205,9 @@ class DialogueStateTracker(object):
             and reset form validation and rejection parameters
         """
         self.latest_action_name = action_name
+        # TODO：待理解
         if self.active_form.get("name"):
+            # 当前正在操作某个表单
             # reset form validation if some form is active
             self.active_form["validate"] = True
         if action_name == self.active_form.get("name"):
@@ -237,7 +242,7 @@ class DialogueStateTracker(object):
 
     def get_latest_input_channel(self) -> Optional[Text]:
         """Get the name of the input_channel of the latest UserUttered event"""
-
+        # 上一条用户说的话是从哪个通道传过来的
         for e in reversed(self.events):
             if isinstance(e, UserUttered):
                 return e.input_channel
@@ -264,6 +269,7 @@ class DialogueStateTracker(object):
 
     def init_copy(self) -> "DialogueStateTracker":
         """Creates a new state tracker with the same initial values."""
+        # 返回一个 纯净版/精简版 DialogueStateTracker
         from rasa.core.channels.channel import UserMessage
 
         return DialogueStateTracker(
@@ -277,7 +283,7 @@ class DialogueStateTracker(object):
 
         The resulting array is representing
         the trackers before each action."""
-
+        # TODO：待调试
         tracker = self.init_copy()
 
         ignored_trackers = []
@@ -343,7 +349,7 @@ class DialogueStateTracker(object):
 
     def applied_events(self) -> List[Event]:
         """Returns all actions that should be applied - w/o reverted events."""
-        # TODO:没看明白
+        # 事件回溯（关键点切片）
         def undo_till_previous(event_type, done_events):
             """Removes events from `done_events` until the first
                occurrence `event_type` is found which is also removed."""
@@ -372,7 +378,7 @@ class DialogueStateTracker(object):
 
     def replay_events(self) -> None:
         """Update the tracker based on a list of events."""
-
+        # 重新执行已经执行过的事件
         applied_events = self.applied_events()
         for event in applied_events:
             event.apply_to(self)
@@ -391,7 +397,7 @@ class DialogueStateTracker(object):
             )
 
         self._reset()
-        self.events.extend(dialogue.events)
+        self.events.extend(dialogue.events)  # 添加dialogue中的事件
         self.replay_events()
 
     def copy(self):
