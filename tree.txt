@@ -1,0 +1,647 @@
+.
+├── alt_requirements
+│   ├── conda-requirements.txt
+│   ├── requirements_bare.txt
+│   ├── requirements_dev.txt
+│   ├── requirements_docs.txt
+│   ├── requirements_full.txt
+│   ├── requirements_pretrained_embeddings_mitie.txt
+│   └── requirements_pretrained_embeddings_spacy.txt
+├── binder
+│   ├── postBuild
+│   └── requirements.txt
+├── CHANGELOG.rst
+├── cloudbuild.yaml
+├── CODE_OF_CONDUCT.md
+├── data
+│   ├── examples
+│   │   ├── dialogflow
+│   │   │   ├── agent.json
+│   │   │   ├── entities
+│   │   │   │   ├── cuisine_entries_en.json
+│   │   │   │   ├── cuisine_entries_es.json
+│   │   │   │   ├── cuisine.json
+│   │   │   │   ├── location_entries_en.json
+│   │   │   │   ├── location_entries_es.json
+│   │   │   │   └── location.json
+│   │   │   ├── intents
+│   │   │   │   ├── affirm.json
+│   │   │   │   ├── affirm_usersays_en.json
+│   │   │   │   ├── affirm_usersays_es.json
+│   │   │   │   ├── Default Fallback Intent.json
+│   │   │   │   ├── goodbye.json
+│   │   │   │   ├── goodbye_usersays_en.json
+│   │   │   │   ├── goodbye_usersays_es.json
+│   │   │   │   ├── hi.json
+│   │   │   │   ├── hi_usersays_en.json
+│   │   │   │   ├── hi_usersays_es.json
+│   │   │   │   ├── inform.json
+│   │   │   │   ├── inform_usersays_en.json
+│   │   │   │   └── inform_usersays_es.json
+│   │   │   └── package.json
+│   │   ├── luis
+│   │   │   └── demo-restaurants.json
+│   │   ├── rasa
+│   │   │   ├── demo-rasa.json
+│   │   │   └── demo-rasa.md
+│   │   └── wit
+│   │       └── demo-flights.json
+│   ├── README.md
+│   ├── test
+│   │   ├── config_embedding_test.yml
+│   │   ├── demo-rasa-noents.json
+│   │   ├── demo-rasa-small.json
+│   │   ├── demo-rasa-zh.json
+│   │   ├── dialogflow_en_converted_to_rasa.json
+│   │   ├── dialogflow_es_converted_to_rasa.json
+│   │   ├── json_converted_to_md.md
+│   │   ├── json_with_special_chars_convered_to_md.md
+│   │   ├── lookup_tables
+│   │   │   ├── lookup_table.json
+│   │   │   ├── lookup_table.md
+│   │   │   └── plates.txt
+│   │   ├── luis_converted_to_rasa.json
+│   │   ├── markdown_single_sections
+│   │   │   ├── regex_only.md
+│   │   │   └── synonyms_only.md
+│   │   ├── md_converted_to_json.json
+│   │   ├── multiple_files_json
+│   │   │   ├── demo-rasa-affirm.json
+│   │   │   ├── demo-rasa-goodbye.json
+│   │   │   ├── demo-rasa-greet.json
+│   │   │   └── demo-rasa-restaurant_search.json
+│   │   ├── multiple_files_markdown
+│   │   │   ├── demo-rasa-affirm.md
+│   │   │   ├── demo-rasa-goodbye.md
+│   │   │   ├── demo-rasa-greet.md
+│   │   │   └── demo-rasa-restaurant_search.md
+│   │   ├── training_data_containing_special_chars.json
+│   │   └── wit_converted_to_rasa.json
+│   ├── test_config
+│   │   ├── embedding_random_seed.yaml
+│   │   ├── example_config.yaml
+│   │   ├── keras_random_seed.yaml
+│   │   ├── max_hist_config.yml
+│   │   ├── no_max_hist_config.yml
+│   │   └── stack_config.yml
+│   ├── test_dialogues
+│   │   ├── default.json
+│   │   ├── formbot.json
+│   │   ├── moodbot.json
+│   │   └── restaurantbot.json
+│   ├── test_domains
+│   │   ├── default_unfeaturized_entities.yml
+│   │   ├── default_with_mapping.yml
+│   │   ├── default_with_slots.yml
+│   │   ├── default.yml
+│   │   ├── duplicate_actions.yml
+│   │   ├── duplicate_entities.yml
+│   │   ├── duplicate_intents.yml
+│   │   ├── duplicate_templates.yml
+│   │   ├── form.yml
+│   │   ├── invalid_format.yml
+│   │   ├── missing_text_for_templates.yml
+│   │   ├── people_form.yml
+│   │   ├── query_form.yml
+│   │   ├── restaurant_form.yml
+│   │   └── travel_form.yml
+│   ├── test_endpoints
+│   │   ├── custom_tracker_endpoints.yml
+│   │   ├── event_brokers
+│   │   │   ├── file_endpoint.yml
+│   │   │   ├── kafka_plaintext_endpoint.yml
+│   │   │   ├── kafka_ssl_endpoint.yml
+│   │   │   ├── pika_endpoint.yml
+│   │   │   └── sql_endpoint.yml
+│   │   ├── example_endpoints.yml
+│   │   ├── __init__.py
+│   │   └── model_endpoint.yml
+│   ├── test_evaluations
+│   │   ├── end_to_end_story.md
+│   │   └── story_unknown_entity.md
+│   ├── test_multi_domain
+│   │   ├── config.yml
+│   │   ├── data
+│   │   │   ├── GreetBot
+│   │   │   │   ├── data
+│   │   │   │   │   ├── nlu.md
+│   │   │   │   │   └── stories.md
+│   │   │   │   └── domain.yml
+│   │   │   ├── MoodBot
+│   │   │   │   ├── config.yml
+│   │   │   │   ├── data
+│   │   │   │   │   ├── nlu.md
+│   │   │   │   │   └── stories.md
+│   │   │   │   └── domain.yml
+│   │   │   ├── nlu.md
+│   │   │   └── stories.md
+│   │   └── domain.yml
+│   ├── test_multifile_stories
+│   │   ├── stories_part_1.md
+│   │   └── stories_part_2.md
+│   ├── test_stories
+│   │   ├── stories_babi_small.md
+│   │   ├── stories_checkpoint_after_or.md
+│   │   ├── stories_defaultdomain.md
+│   │   ├── stories_form.md
+│   │   ├── stories.md
+│   │   ├── stories_restart.md
+│   │   ├── stories_unfeaturized_entities.md
+│   │   ├── stories_unused_checkpoints.md
+│   │   ├── stories_with_cycle.md
+│   │   └── stories_with_multiline_comments.md
+│   └── test_trackers
+│       └── tracker_moodbot.json
+├── docker
+│   ├── docker-cloud.yml
+│   ├── docker-compose.yml
+│   ├── Dockerfile_full
+│   ├── Dockerfile_pretrained_embeddings_mitie_en
+│   ├── Dockerfile_pretrained_embeddings_spacy_de
+│   └── Dockerfile_pretrained_embeddings_spacy_en
+├── Dockerfile
+├── docs
+│   ├── api
+│   │   ├── action-server.rst
+│   │   ├── agent.rst
+│   │   ├── custom-nlu-components.rst
+│   │   ├── event-brokers.rst
+│   │   ├── events.rst
+│   │   ├── featurization.rst
+│   │   ├── http-api.rst
+│   │   ├── jupyter-notebooks.rst
+│   │   ├── tracker.rst
+│   │   ├── tracker-stores.rst
+│   │   └── training-data-importers.rst
+│   ├── changelog.rst
+│   ├── conf.py
+│   ├── core
+│   │   ├── about.rst
+│   │   ├── actions.rst
+│   │   ├── domains.rst
+│   │   ├── fallback-actions.rst
+│   │   ├── forms.rst
+│   │   ├── interactive-learning.rst
+│   │   ├── old-core-change-log.rst
+│   │   ├── old-core-migration-guide.rst
+│   │   ├── policies.rst
+│   │   ├── responses.rst
+│   │   ├── slots.rst
+│   │   └── stories.rst
+│   ├── dialogue-elements
+│   │   ├── completing-tasks.rst
+│   │   ├── dialogue-elements.rst
+│   │   ├── guiding-users.rst
+│   │   └── small-talk.rst
+│   ├── index.rst
+│   ├── Makefile
+│   ├── migrate-from
+│   │   ├── facebook-wit-ai-to-rasa.rst
+│   │   ├── google-dialogflow-to-rasa.rst
+│   │   ├── ibm-watson-to-rasa.rst
+│   │   └── microsoft-luis-to-rasa.rst
+│   ├── migration-guide.rst
+│   ├── multi-skill-assistants.rst
+│   ├── nlu
+│   │   ├── about.rst
+│   │   ├── choosing-a-pipeline.rst
+│   │   ├── components.rst
+│   │   ├── entity-extraction.rst
+│   │   ├── language-support.rst
+│   │   ├── old-nlu-change-log.rst
+│   │   ├── old-nlu-migration-guide.rst
+│   │   ├── training-data-format.rst
+│   │   └── using-nlu-only.rst
+│   ├── _static
+│   │   ├── images
+│   │   │   ├── component_lifecycle.png
+│   │   │   ├── dialogflow_export_2.png
+│   │   │   ├── dialogflow_export.png
+│   │   │   ├── intents-user-goals-dialogue-elements.png
+│   │   │   ├── interactive_learning_graph.gif
+│   │   │   ├── luis_export.png
+│   │   │   ├── mood_bot.png
+│   │   │   └── rasa-message-processing.png
+│   │   └── spec
+│   │       ├── action-server.yml
+│   │       └── rasa.yml
+│   ├── user-guide
+│   │   ├── architecture.rst
+│   │   ├── cloud-storage.rst
+│   │   ├── command-line-interface.rst
+│   │   ├── connectors
+│   │   │   ├── cisco-webex-teams.rst
+│   │   │   ├── custom-connectors.rst
+│   │   │   ├── facebook-messenger.rst
+│   │   │   ├── mattermost.rst
+│   │   │   ├── microsoft-bot-framework.rst
+│   │   │   ├── rocketchat.rst
+│   │   │   ├── slack.rst
+│   │   │   ├── telegram.rst
+│   │   │   ├── twilio.rst
+│   │   │   └── your-own-website.rst
+│   │   ├── evaluating-models.rst
+│   │   ├── installation.rst
+│   │   ├── messaging-and-voice-channels.rst
+│   │   ├── rasa-tutorial.rst
+│   │   ├── running-rasa-with-docker.rst
+│   │   ├── running-the-server.rst
+│   │   └── validate-files.rst
+│   └── utils
+│       ├── __init__.py
+│       └── StoryLexer.py
+├── examples
+│   ├── concertbot
+│   │   ├── actions.py
+│   │   ├── config.yml
+│   │   ├── data
+│   │   │   └── stories.md
+│   │   ├── domain.yml
+│   │   ├── endpoints.yml
+│   │   ├── __init__.py
+│   │   └── README.md
+│   ├── formbot
+│   │   ├── actions.py
+│   │   ├── config.yml
+│   │   ├── data
+│   │   │   ├── nlu.md
+│   │   │   └── stories.md
+│   │   ├── domain.yml
+│   │   ├── endpoints.yml
+│   │   └── README.md
+│   ├── __init__.py
+│   ├── moodbot
+│   │   ├── config.yml
+│   │   ├── credentials.yml
+│   │   ├── data
+│   │   │   ├── nlu.md
+│   │   │   └── stories.md
+│   │   ├── domain.yml
+│   │   └── README.md
+│   ├── nlg_server
+│   │   ├── __init__.py
+│   │   └── nlg_server.py
+│   └── restaurantbot
+│       ├── actions.py
+│       ├── config.yml
+│       ├── data
+│       │   ├── nlu.md
+│       │   └── stories.md
+│       ├── domain.yml
+│       ├── endpoints.yml
+│       ├── __init__.py
+│       ├── policy.py
+│       ├── README.md
+│       └── run.py
+├── heroku
+│   ├── Procfile
+│   └── runtime.txt
+├── LICENSE.txt
+├── Makefile
+├── MANIFEST.in
+├── NOTICE
+├── pip-wheel-metadata
+│   └── rasa.dist-info
+│       ├── entry_points.txt
+│       ├── LICENSE.txt
+│       ├── METADATA
+│       └── top_level.txt
+├── pyproject.toml
+├── rasa
+│   ├── cli
+│   │   ├── arguments
+│   │   │   ├── data.py
+│   │   │   ├── default_arguments.py
+│   │   │   ├── __init__.py
+│   │   │   ├── interactive.py
+│   │   │   ├── run.py
+│   │   │   ├── shell.py
+│   │   │   ├── test.py
+│   │   │   ├── train.py
+│   │   │   ├── visualize.py
+│   │   │   └── x.py
+│   │   ├── data.py
+│   │   ├── default_config.yml
+│   │   ├── initial_project
+│   │   │   ├── actions.py
+│   │   │   ├── config.yml
+│   │   │   ├── credentials.yml
+│   │   │   ├── data
+│   │   │   │   ├── nlu.md
+│   │   │   │   └── stories.md
+│   │   │   ├── domain.yml
+│   │   │   ├── endpoints.yml
+│   │   │   └── __init__.py
+│   │   ├── __init__.py
+│   │   ├── interactive.py
+│   │   ├── run.py
+│   │   ├── scaffold.py
+│   │   ├── shell.py
+│   │   ├── test.py
+│   │   ├── train.py
+│   │   ├── utils.py
+│   │   ├── visualize.py
+│   │   └── x.py
+│   ├── constants.py
+│   ├── core
+│   │   ├── actions
+│   │   │   ├── action.py
+│   │   │   └── __init__.py
+│   │   ├── agent.py
+│   │   ├── broker.py
+│   │   ├── channels
+│   │   │   ├── botframework.py
+│   │   │   ├── callback.py
+│   │   │   ├── channel.py
+│   │   │   ├── console.py
+│   │   │   ├── facebook.py
+│   │   │   ├── __init__.py
+│   │   │   ├── mattermost.py
+│   │   │   ├── rasa_chat.py
+│   │   │   ├── rocketchat.py
+│   │   │   ├── slack.py
+│   │   │   ├── socketio.py
+│   │   │   ├── telegram.py
+│   │   │   ├── twilio.py
+│   │   │   └── webexteams.py
+│   │   ├── config.py
+│   │   ├── constants.py
+│   │   ├── conversation.py
+│   │   ├── domain.py
+│   │   ├── evaluate.py
+│   │   ├── events
+│   │   │   └── __init__.py
+│   │   ├── exceptions.py
+│   │   ├── featurizers.py
+│   │   ├── __init__.py
+│   │   ├── interpreter.py
+│   │   ├── jobs.py
+│   │   ├── nlg
+│   │   │   ├── callback.py
+│   │   │   ├── generator.py
+│   │   │   ├── __init__.py
+│   │   │   ├── interpolator.py
+│   │   │   └── template.py
+│   │   ├── policies
+│   │   │   ├── embedding_policy.py
+│   │   │   ├── ensemble.py
+│   │   │   ├── fallback.py
+│   │   │   ├── form_policy.py
+│   │   │   ├── __init__.py
+│   │   │   ├── keras_policy.py
+│   │   │   ├── mapping_policy.py
+│   │   │   ├── memoization.py
+│   │   │   ├── policy.py
+│   │   │   ├── sklearn_policy.py
+│   │   │   ├── tf_utils.py
+│   │   │   └── two_stage_fallback.py
+│   │   ├── processor.py
+│   │   ├── registry.py
+│   │   ├── restore.py
+│   │   ├── run.py
+│   │   ├── schemas
+│   │   │   └── domain.yml
+│   │   ├── slots.py
+│   │   ├── test.py
+│   │   ├── trackers.py
+│   │   ├── tracker_store.py
+│   │   ├── training
+│   │   │   ├── data.py
+│   │   │   ├── dsl.py
+│   │   │   ├── generator.py
+│   │   │   ├── __init__.py
+│   │   │   ├── interactive.py
+│   │   │   ├── structures.py
+│   │   │   ├── visualization.html
+│   │   │   └── visualization.py
+│   │   ├── train.py
+│   │   ├── utils.py
+│   │   ├── validator.py
+│   │   └── visualize.py
+│   ├── data.py
+│   ├── exceptions.py
+│   ├── importers
+│   │   ├── importer.py
+│   │   ├── __init__.py
+│   │   ├── rasa.py
+│   │   ├── skill.py
+│   │   └── utils.py
+│   ├── __init__.py
+│   ├── jupyter.py
+│   ├── __main__.py
+│   ├── model.py
+│   ├── nlu
+│   │   ├── classifiers
+│   │   │   ├── embedding_intent_classifier.py
+│   │   │   ├── __init__.py
+│   │   │   ├── keyword_intent_classifier.py
+│   │   │   ├── mitie_intent_classifier.py
+│   │   │   └── sklearn_intent_classifier.py
+│   │   ├── components.py
+│   │   ├── config.py
+│   │   ├── convert.py
+│   │   ├── emulators
+│   │   │   ├── dialogflow.py
+│   │   │   ├── __init__.py
+│   │   │   ├── luis.py
+│   │   │   ├── no_emulator.py
+│   │   │   └── wit.py
+│   │   ├── evaluate.py
+│   │   ├── extractors
+│   │   │   ├── crf_entity_extractor.py
+│   │   │   ├── duckling_http_extractor.py
+│   │   │   ├── entity_synonyms.py
+│   │   │   ├── __init__.py
+│   │   │   ├── mitie_entity_extractor.py
+│   │   │   └── spacy_entity_extractor.py
+│   │   ├── featurizers
+│   │   │   ├── count_vectors_featurizer.py
+│   │   │   ├── __init__.py
+│   │   │   ├── mitie_featurizer.py
+│   │   │   ├── ngram_featurizer.py
+│   │   │   ├── regex_featurizer.py
+│   │   │   └── spacy_featurizer.py
+│   │   ├── __init__.py
+│   │   ├── model.py
+│   │   ├── persistor.py
+│   │   ├── registry.py
+│   │   ├── run.py
+│   │   ├── schemas
+│   │   │   └── config.yml
+│   │   ├── test.py
+│   │   ├── tokenizers
+│   │   │   ├── __init__.py
+│   │   │   ├── jieba_tokenizer.py
+│   │   │   ├── mitie_tokenizer.py
+│   │   │   ├── spacy_tokenizer.py
+│   │   │   └── whitespace_tokenizer.py
+│   │   ├── training_data
+│   │   │   ├── formats
+│   │   │   │   ├── dialogflow.py
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── luis.py
+│   │   │   │   ├── markdown.py
+│   │   │   │   ├── rasa.py
+│   │   │   │   ├── readerwriter.py
+│   │   │   │   └── wit.py
+│   │   │   ├── __init__.py
+│   │   │   ├── loading.py
+│   │   │   ├── message.py
+│   │   │   ├── training_data.py
+│   │   │   └── util.py
+│   │   ├── train.py
+│   │   └── utils
+│   │       ├── __init__.py
+│   │       ├── mitie_utils.py
+│   │       └── spacy_utils.py
+│   ├── run.py
+│   ├── server.py
+│   ├── test.py
+│   ├── train.py
+│   ├── utils
+│   │   ├── common.py
+│   │   ├── endpoints.py
+│   │   ├── __init__.py
+│   │   ├── io.py
+│   │   └── validation.py
+│   └── version.py
+├── rasa_core
+│   └── __init__.py
+├── rasa.egg-info
+│   ├── dependency_links.txt
+│   ├── entry_points.txt
+│   ├── PKG-INFO
+│   ├── requires.txt
+│   ├── SOURCES.txt
+│   └── top_level.txt
+├── rasa_nlu
+│   └── __init__.py
+├── README.md
+├── requirements-dev.txt
+├── requirements-docs.txt
+├── requirements.txt
+├── sample_configs
+│   ├── config_crf_custom_features.yml
+│   ├── config_defaults.yml
+│   ├── config_pretrained_embeddings_mitie_2.yml
+│   ├── config_pretrained_embeddings_mitie.yml
+│   ├── config_pretrained_embeddings_mitie_zh.yml
+│   ├── config_pretrained_embeddings_spacy_de.yml
+│   ├── config_pretrained_embeddings_spacy_duckling.yml
+│   ├── config_pretrained_embeddings_spacy.yml
+│   ├── config_supervised_embeddings_duckling.yml
+│   ├── config_supervised_embeddings.yml
+│   ├── config_train_server_json.yml
+│   └── config_train_server_md.yml
+├── secrets.tar.enc
+├── setup.cfg
+├── setup.py
+├── test_models
+│   ├── test_model_mitie
+│   │   └── model_20170628-002704
+│   │       ├── entity_extractor.dat
+│   │       ├── entity_synonyms.json
+│   │       ├── intent_classifier.dat
+│   │       ├── metadata.json
+│   │       └── training_data.json
+│   ├── test_model_mitie_sklearn
+│   │   └── model_20170628-002712
+│   │       ├── entity_extractor.dat
+│   │       ├── entity_synonyms.json
+│   │       ├── intent_classifier.pkl
+│   │       ├── metadata.json
+│   │       └── training_data.json
+│   └── test_model_spacy_sklearn
+│       └── model_20170628-002705
+│           ├── crf_model.pkl
+│           ├── entity_synonyms.json
+│           ├── intent_classifier.pkl
+│           ├── metadata.json
+│           └── training_data.json
+├── tests
+│   ├── cli
+│   │   ├── conftest.py
+│   │   ├── __init__.py
+│   │   ├── test_cli.py
+│   │   ├── test_rasa_data.py
+│   │   ├── test_rasa_init.py
+│   │   ├── test_rasa_interactive.py
+│   │   ├── test_rasa_run.py
+│   │   ├── test_rasa_shell.py
+│   │   ├── test_rasa_test.py
+│   │   ├── test_rasa_train.py
+│   │   ├── test_rasa_visualize.py
+│   │   ├── test_rasa_x.py
+│   │   └── test_utils.py
+│   ├── conftest.py
+│   ├── core
+│   │   ├── conftest.py
+│   │   ├── __init__.py
+│   │   ├── test_actions.py
+│   │   ├── test_agent.py
+│   │   ├── test_broker.py
+│   │   ├── test_channels.py
+│   │   ├── test_config.py
+│   │   ├── test_data.py
+│   │   ├── test_dialogues.py
+│   │   ├── test_domain.py
+│   │   ├── test_dsl.py
+│   │   ├── test_ensemble.py
+│   │   ├── test_evaluation.py
+│   │   ├── test_events.py
+│   │   ├── test_examples.py
+│   │   ├── test_featurizer.py
+│   │   ├── test_graph.py
+│   │   ├── test_interactive.py
+│   │   ├── test_interpreter.py
+│   │   ├── test_model.py
+│   │   ├── test_nlg.py
+│   │   ├── test_policies.py
+│   │   ├── test_processor.py
+│   │   ├── test_restore.py
+│   │   ├── test_run.py
+│   │   ├── test_slots.py
+│   │   ├── test_trackers.py
+│   │   ├── test_tracker_stores.py
+│   │   ├── test_training.py
+│   │   ├── test_utils.py
+│   │   ├── test_validator.py
+│   │   ├── test_visualization.py
+│   │   └── utilities.py
+│   ├── __init__.py
+│   ├── nlu
+│   │   ├── base
+│   │   │   ├── __init__.py
+│   │   │   ├── test_components.py
+│   │   │   ├── test_config.py
+│   │   │   ├── test_emulators.py
+│   │   │   ├── test_evaluation.py
+│   │   │   ├── test_extractors.py
+│   │   │   ├── test_featurizers.py
+│   │   │   ├── test_interpreter.py
+│   │   │   ├── test_persistor.py
+│   │   │   ├── test_synonyms.py
+│   │   │   ├── test_tokenizers.py
+│   │   │   ├── test_training_data.py
+│   │   │   └── test_utils.py
+│   │   ├── conftest.py
+│   │   ├── example_component.py
+│   │   ├── __init__.py
+│   │   ├── training
+│   │   │   ├── __init__.py
+│   │   │   └── test_train.py
+│   │   └── utilities.py
+│   ├── test_importer.py
+│   ├── test_server.py
+│   ├── test_skill.py
+│   ├── test_train.py
+│   ├── utilities.py
+│   └── utils
+│       ├── __init__.py
+│       ├── test_common.py
+│       ├── test_endpoints.py
+│       ├── test_io.py
+│       └── test_validation.py
+└── tree.txt
+
+99 directories, 545 files
